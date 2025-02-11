@@ -61,6 +61,25 @@ console.log(mixed2);
 let uid;
 uid = '123';
 uid = 123;
+function swapIdType(id) {
+    if (typeof id === 'string') {
+        return parseInt(id);
+    }
+    else {
+        return uid.toString();
+    }
+}
+const idOne = swapIdType(1);
+const idTwo = swapIdType('2');
+console.log(idOne, idTwo);
+function logDetail(value) {
+    if (value.type === 'user') {
+        console.log(value.email, value.username);
+    }
+    if (value.type === 'person') {
+        console.log(value.firstname, value.age);
+    }
+}
 // objects explicit types
 let ninjaOne;
 ninjaOne = { name: 'yoshi', age: 30 };
@@ -116,6 +135,15 @@ const logDetails = (uid, item) => {
 const greeting = (user) => {
     console.log(`${user.name} says hello`);
 };
+function getRandomColor() {
+    const r = Math.floor(Math.random() * 255);
+    const g = Math.floor(Math.random() * 255);
+    const b = Math.floor(Math.random() * 255);
+    return [r, g, b];
+}
+const colorOne = getRandomColor();
+const colorTwo = getRandomColor();
+console.log(colorOne, colorTwo);
 // function signatures
 let gree;
 gree = (name, greeting) => {
@@ -134,3 +162,17 @@ let log;
 log = (ninja) => {
     console.log(`${ninja.name} is ${ninja.age} years old`);
 };
+const authorOne = { name: 'mario', avatar: '/img/mario.png' };
+const newPost = {
+    title: 'My first post',
+    body: 'somethong interesting',
+    tags: ['gaming', 'tech'],
+    create_at: new Date(),
+    author: authorOne
+};
+function createPost(post) {
+    console.log(`Created post ${post.title} by ${post.author.name}`);
+}
+createPost(newPost);
+let posts = [];
+posts.push(newPost);

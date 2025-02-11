@@ -78,6 +78,47 @@ let uid: string|number;
 uid = '123';
 uid = 123;
 
+type Id = number | string
+
+function swapIdType(id: Id) {
+    if (typeof id === 'string') {
+        return parseInt(id)
+    } else {
+        return uid.toString()
+    }
+}
+
+const idOne = swapIdType(1)
+const idTwo = swapIdType('2')
+
+console.log(idOne, idTwo)
+
+// tagged interfaces
+
+interface User {
+    type: 'user'
+    username: string
+    email: string
+    id: Id
+}
+
+interface Person {
+    type: 'person'
+    firstname: string
+    age: number
+    id: Id
+}
+
+function logDetail(value: User | Person): void {
+    if (value.type === 'user') {
+        console.log(value.email, value.username)
+    }
+    if (value.type === 'person') {
+        console.log(value.firstname, value.age)
+    }
+}
+
+
 // objects explicit types
 let ninjaOne: object;
 ninjaOne = { name: 'yoshi', age: 30 }
@@ -157,6 +198,20 @@ const greeting = (user: objWIthName) => {
     console.log(`${user.name} says hello`);
 }
 
+type Rgb = [number, number, number]
+
+function getRandomColor(): Rgb {
+    const r = Math.floor(Math.random() * 255)
+    const g = Math.floor(Math.random() * 255)
+    const b = Math.floor(Math.random() * 255)
+
+    return [r, g, b]
+}
+
+const colorOne = getRandomColor()
+const colorTwo = getRandomColor()
+console.log(colorOne, colorTwo)
+
 // function signatures
 let gree: (a: string, b: string) => void;
 gree = (name: string, greeting: string) => {
@@ -181,4 +236,36 @@ log = (ninja: person) => {
     console.log(`${ninja.name} is ${ninja.age} years old`);
 }
 
+// Interface
+interface Author {
+    name: string,
+    avatar: string
+}
 
+const authorOne: Author = { name: 'mario', avatar: '/img/mario.png'}
+
+interface Post {
+    title: string,
+    body: string,
+    tags: string[],
+    create_at: Date,
+    author: Author
+}
+
+const newPost: Post = {
+    title: 'My first post',
+    body: 'somethong interesting',
+    tags: ['gaming', 'tech'],
+    create_at: new Date(),
+    author: authorOne
+}
+
+function createPost(post: Post): void {
+    console.log(`Created post ${post.title} by ${post.author.name}`)
+}
+
+createPost(newPost)
+
+let posts: Post[] = []
+
+posts.push(newPost)
